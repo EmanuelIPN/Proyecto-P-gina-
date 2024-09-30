@@ -1,3 +1,4 @@
+import path from 'path';
 import express, { Application } from 'express';
 import config from './../config'
 import patientRoutes from '../routes/pacientes';
@@ -31,6 +32,10 @@ class Server {
 
     routes() {
         this.app.use( config.apiPaths.pacientes, patientRoutes );
+
+        this.app.get('/', (req, res) => {
+            res.sendFile(path.join(__dirname, '../public/index.html'));
+        });
     }
 
     listen() {
